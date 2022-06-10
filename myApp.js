@@ -1,8 +1,18 @@
 require('dotenv').config();
 let mongoose = require('mongoose')
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const Schema = mongoose.Schema;
+//mongoose.connect(process.env.MONGO_URI)
 
-let Person;
+//let Person;
+
+const personSchema = new Schema({
+  name: {type: String, required: true},
+  age: Number,
+  favoriteFoods: [String]
+});
+
+const Person = mongoose.model("Person", personSchema)
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
@@ -51,6 +61,22 @@ const queryChain = (done) => {
 
   done(null /*, data*/);
 };
+
+// import mongoose from 'mongoose';
+// const { Schema } = mongoose;
+
+// const blogSchema = new Schema({
+//   title:  String, // String is shorthand for {type: String}
+//   author: String,
+//   body:   String,
+//   comments: [{ body: String, date: Date }],
+//   date: { type: Date, default: Date.now },
+//   hidden: Boolean,
+//   meta: {
+//     votes: Number,
+//     favs:  Number
+//   }
+// });
 
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
